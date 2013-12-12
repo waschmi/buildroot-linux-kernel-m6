@@ -3191,68 +3191,68 @@ static ssize_t bma250_selftest_store(struct device *dev,
 	return count;
 }
 
-static DEVICE_ATTR(range, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(range, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_range_show, bma250_range_store);
-static DEVICE_ATTR(bandwidth, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(bandwidth, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_bandwidth_show, bma250_bandwidth_store);
-static DEVICE_ATTR(mode, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(mode, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_mode_show, bma250_mode_store);
 static DEVICE_ATTR(value, S_IRUGO,
 		bma250_value_show, NULL);
-static DEVICE_ATTR(delay, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(delay, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_delay_show, bma250_delay_store);
-static DEVICE_ATTR(enable, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(enable, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_enable_show, bma250_enable_store);
-static DEVICE_ATTR(enable_int, S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(enable_int, S_IWUSR|S_IWGRP,
 		NULL, bma250_enable_int_store);
-static DEVICE_ATTR(int_mode, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(int_mode, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_int_mode_show, bma250_int_mode_store);
-static DEVICE_ATTR(slope_duration, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(slope_duration, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_slope_duration_show, bma250_slope_duration_store);
-static DEVICE_ATTR(slope_threshold, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(slope_threshold, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_slope_threshold_show, bma250_slope_threshold_store);
-static DEVICE_ATTR(high_g_duration, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(high_g_duration, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_high_g_duration_show, bma250_high_g_duration_store);
-static DEVICE_ATTR(high_g_threshold, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(high_g_threshold, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_high_g_threshold_show, bma250_high_g_threshold_store);
-static DEVICE_ATTR(low_g_duration, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(low_g_duration, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_low_g_duration_show, bma250_low_g_duration_store);
-static DEVICE_ATTR(low_g_threshold, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(low_g_threshold, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_low_g_threshold_show, bma250_low_g_threshold_store);
-static DEVICE_ATTR(tap_duration, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(tap_duration, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_tap_duration_show, bma250_tap_duration_store);
-static DEVICE_ATTR(tap_threshold, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(tap_threshold, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_tap_threshold_show, bma250_tap_threshold_store);
-static DEVICE_ATTR(tap_quiet, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(tap_quiet, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_tap_quiet_show, bma250_tap_quiet_store);
-static DEVICE_ATTR(tap_shock, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(tap_shock, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_tap_shock_show, bma250_tap_shock_store);
-static DEVICE_ATTR(tap_samp, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(tap_samp, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_tap_samp_show, bma250_tap_samp_store);
-static DEVICE_ATTR(orient_mode, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(orient_mode, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_orient_mode_show, bma250_orient_mode_store);
-static DEVICE_ATTR(orient_blocking, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(orient_blocking, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_orient_blocking_show, bma250_orient_blocking_store);
-static DEVICE_ATTR(orient_hyst, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(orient_hyst, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_orient_hyst_show, bma250_orient_hyst_store);
-static DEVICE_ATTR(orient_theta, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(orient_theta, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_orient_theta_show, bma250_orient_theta_store);
-static DEVICE_ATTR(flat_theta, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(flat_theta, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_flat_theta_show, bma250_flat_theta_store);
-static DEVICE_ATTR(flat_hold_time, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(flat_hold_time, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_flat_hold_time_show, bma250_flat_hold_time_store);
-static DEVICE_ATTR(reg, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(reg, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_register_show, bma250_register_store);
-static DEVICE_ATTR(fast_calibration_x, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(fast_calibration_x, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_fast_calibration_x_show,
 		bma250_fast_calibration_x_store);
-static DEVICE_ATTR(fast_calibration_y, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(fast_calibration_y, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_fast_calibration_y_show,
 		bma250_fast_calibration_y_store);
-static DEVICE_ATTR(fast_calibration_z, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(fast_calibration_z, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_fast_calibration_z_show,
 		bma250_fast_calibration_z_store);
-static DEVICE_ATTR(selftest, S_IRUGO|S_IWUSR|S_IWGRP|S_IWOTH,
+static DEVICE_ATTR(selftest, S_IRUGO|S_IWUSR|S_IWGRP,
 		bma250_selftest_show, bma250_selftest_store);
 
 static struct attribute *bma250_attributes[] = {
@@ -3640,32 +3640,35 @@ exit:
 }
 
 #ifdef CONFIG_HAS_EARLYSUSPEND
+
 static void bma250_early_suspend(struct early_suspend *h)
 {
-	struct bma250_data *data =
-		container_of(h, struct bma250_data, early_suspend);
+    struct bma250_data *data =
+        container_of(h, struct bma250_data, early_suspend);
 
-	mutex_lock(&data->enable_mutex);
-	if (atomic_read(&data->enable) == 1) {
-		bma250_set_mode(data->bma250_client, BMA250_MODE_SUSPEND);
-		cancel_delayed_work_sync(&data->work);
-	}
-	mutex_unlock(&data->enable_mutex);
+    mutex_lock(&data->enable_mutex);
+
+    atomic_set(&data->enable, 0);
+    bma250_set_mode(data->bma250_client, BMA250_MODE_SUSPEND);
+    cancel_delayed_work_sync(&data->work);
+
+    mutex_unlock(&data->enable_mutex);
 }
 
 
 static void bma250_late_resume(struct early_suspend *h)
 {
-	struct bma250_data *data =
-		container_of(h, struct bma250_data, early_suspend);
+    struct bma250_data *data =
+    container_of(h, struct bma250_data, early_suspend);
 
-	mutex_lock(&data->enable_mutex);
-	if (atomic_read(&data->enable) == 1) {
-		bma250_set_mode(data->bma250_client, BMA250_MODE_NORMAL);
-		schedule_delayed_work(&data->work,
-				msecs_to_jiffies(atomic_read(&data->delay)));
-	}
-	mutex_unlock(&data->enable_mutex);
+    mutex_lock(&data->enable_mutex);
+    
+    atomic_set(&data->enable, 1);
+    bma250_set_mode(data->bma250_client, BMA250_MODE_NORMAL);
+    schedule_delayed_work(&data->work,
+        msecs_to_jiffies(atomic_read(&data->delay)));
+
+    mutex_unlock(&data->enable_mutex);
 }
 #endif
 
@@ -3683,61 +3686,26 @@ static int __devexit bma250_remove(struct i2c_client *client)
 
 	return 0;
 }
-#ifdef CONFIG_PM
 
-static int bma250_suspend(struct i2c_client *client, pm_message_t mesg)
-{
-	struct bma250_data *data = i2c_get_clientdata(client);
 
-	mutex_lock(&data->enable_mutex);
-	if (atomic_read(&data->enable) == 1) {
-		bma250_set_mode(data->bma250_client, BMA250_MODE_SUSPEND);
-		cancel_delayed_work_sync(&data->work);
-	}
-	mutex_unlock(&data->enable_mutex);
-
-	return 0;
-}
-
-static int bma250_resume(struct i2c_client *client)
-{
-	struct bma250_data *data = i2c_get_clientdata(client);
-
-	mutex_lock(&data->enable_mutex);
-	if (atomic_read(&data->enable) == 1) {
-		bma250_set_mode(data->bma250_client, BMA250_MODE_NORMAL);
-		schedule_delayed_work(&data->work,
-				msecs_to_jiffies(atomic_read(&data->delay)));
-	}
-	mutex_unlock(&data->enable_mutex);
-
-	return 0;
-}
-
-#else
-
-#define bma250_suspend		NULL
-#define bma250_resume		NULL
-
-#endif /* CONFIG_PM */
 
 static const struct i2c_device_id bma250_id[] = {
-	{ SENSOR_NAME, 0 },
-	{ }
+    { SENSOR_NAME, 0 },
+    { }
 };
 
 MODULE_DEVICE_TABLE(i2c, bma250_id);
 
 static struct i2c_driver bma250_driver = {
-	.driver = {
-		.owner	= THIS_MODULE,
-		.name	= SENSOR_NAME,
-	},
-	.suspend	= bma250_suspend,
-	.resume		= bma250_resume,
-	.id_table	= bma250_id,
-	.probe		= bma250_probe,
-	.remove		= __devexit_p(bma250_remove),
+    .driver = {
+        .owner  = THIS_MODULE,
+        .name   = SENSOR_NAME,
+    },
+    .suspend = NULL,
+    .resume  = NULL,
+    .id_table = bma250_id,
+    .probe = bma250_probe,
+    .remove = __devexit_p(bma250_remove),
 
 };
 

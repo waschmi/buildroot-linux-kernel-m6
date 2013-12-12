@@ -4,4 +4,5 @@
 
 obj-y += misc/
 obj-y += touchscreen/
-obj-y += net/usb/
+obj-y += vout/
+obj-y += board_env/

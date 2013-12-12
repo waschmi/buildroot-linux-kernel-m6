@@ -6,7 +6,8 @@ menu "Device Drivers"
 
 source "customer/drivers/misc/Kconfig"
 source "customer/drivers/touchscreen/Kconfig"
-source "customer/drivers/net/usb/Kconfig"
+source "customer/drivers/vout/Kconfig"
+source "customer/drivers/board_env/Kconfig"
 
 endmenu
 endif # PLAT_MESON
