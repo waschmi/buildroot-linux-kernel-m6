@@ -17,11 +17,11 @@
 #include <mach/am_regs.h>
 #include <mach/gpio.h>
 
-#include <asm/setup.h>
-
 #include "axp18-mfd.h"
 #include "axp19-mfd.h"
 #include "axp20-mfd.h"
+
+struct axp_cfg_info *axp_cfg_board;
 
 static inline int is_ac_online(void)
 {
@@ -232,6 +232,7 @@ static int __devinit axp_mfd_probe(struct i2c_client *client,
 		return -ENOMEM;
 
 	axp = client;
+	axp_cfg_board = pdata->axp_cfg;
 
 	chip->client = client;
 	chip->dev = &client->dev;

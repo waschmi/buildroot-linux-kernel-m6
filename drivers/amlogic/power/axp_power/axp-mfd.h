@@ -1,16 +1,10 @@
 #ifndef __LINUX_AXP_MFD_H_
 #define __LINUX_AXP_MFD_H_
 
-#include <amlogic/battery_parameter.h>
-
 #define AXP18_ADDR			0x2C >> 1
 #define AXP19_ADDR			0x68 >> 1
 #define AXP20_ADDR			0x68 >> 1
 
-#define AXP_PMU_DBG(format, args...)                 \
-    if (1) printk(KERN_ERR "[AXP]"format, ##args)
-
-#define AXP_DRIVER_VERSION      "1.03"
 
 /* Unified sub device IDs for AXP */
 enum {
@@ -68,30 +62,95 @@ enum {
 /* AXP battery charger data */
 struct power_supply_info;
 
-/*
- * these 3 macros are used for parameters pass to led_control call back funtions
- */
-#define AXP_LED_CTRL_DISCHARGING                0           // battery is discharging
-#define AXP_LED_CTRL_CHARGING                   1           // battery is charging
-#define AXP_LED_CTRL_BATTERY_FULL               2           // battery is full
-
-/*
- * @soft_limit_to99: flag for if we need to restrict battery capacity to 99% when have charge current,
- *                   even battery voltage is over ocv_full;
- * @para:            parameters for call back funtions, user implement;
- * @pmu_call_back:   call back function for axp_charging_monitor, you can add anything you want to do
- *                   in this function, this funtion will be called every 2 seconds by default
- */
 struct axp_supply_init_data {
-    int  soft_limit_to99;
-    void *para;                                                     // parameter pointer used for call back, user define
+	/* battery parameters */
+	struct power_supply_info *battery_info;
+
+	/* current and voltage to use for battery charging */
+	unsigned int chgcur;
+	unsigned int chgvol;
+	unsigned int chgend;
+	/*charger control*/
+	bool chgen;
+	bool limit_on;
+	/*charger time */
+	int chgpretime;
+	int chgcsttime;
+
+	/*adc sample time */
+	unsigned int sample_time;
+
 	/* platform callbacks for battery low and critical IRQs */
 	void (*battery_low)(void);
 	void (*battery_critical)(void);
     /*led control*/
-    void (*led_control)(int flag);
-    int  (*pmu_call_back)(void *para);
-	struct battery_parameter *board_battery; 
+    void (*led_control)(flag);
+};
+
+struct axp_cfg_info {
+	
+	int pmu_used;
+	int pmu_twi_id;
+	int pmu_irq_id;
+	int pmu_twi_addr;
+	int pmu_battery_rdc;
+	int pmu_battery_cap;
+	int pmu_init_chgcur;
+	int pmu_suspend_chgcur;
+	int pmu_resume_chgcur;
+	int pmu_shutdown_chgcur;
+	int pmu_init_chgvol;
+	int pmu_init_chgend_rate;
+	int pmu_init_chg_enabled;
+	int pmu_init_adc_freq;
+	int pmu_init_adc_freqc;
+	int pmu_init_chg_pretime;
+	int pmu_init_chg_csttime;
+
+	int pmu_bat_para1;
+	int pmu_bat_para2;
+	int pmu_bat_para3;
+	int pmu_bat_para4;
+	int pmu_bat_para5;
+	int pmu_bat_para6;
+	int pmu_bat_para7;
+	int pmu_bat_para8;
+	int pmu_bat_para9;
+	int pmu_bat_para10;
+	int pmu_bat_para11;
+	int pmu_bat_para12;
+	int pmu_bat_para13;
+	int pmu_bat_para14;
+	int pmu_bat_para15;
+	int pmu_bat_para16;
+
+	int pmu_usbvol_limit;
+	int pmu_usbvol;
+	int pmu_usbcur_limit;
+	int pmu_usbcur;
+
+	int pmu_pwroff_vol;
+	int pmu_pwron_vol;
+
+	int dcdc2_vol;
+	int dcdc3_vol;
+	int ldo2_vol;
+	int ldo3_vol;
+	int ldo4_vol;
+
+	int pmu_pekoff_time;
+	int pmu_pekoff_en;
+	int pmu_peklong_time;
+	int pmu_pekon_time;
+	int pmu_pwrok_time;
+	int pmu_pwrnoe_time;
+	int pmu_intotp_en;
+
+	int	pmu_ntc_enable;
+	int pmu_ntc_ts_current;
+	int pmu_ntc_lowtempvol;
+	int pmu_ntc_hightempvol;
+	
 };
 
 struct axp_funcdev_info {
@@ -105,21 +164,22 @@ struct axp_platform_data {
 	int num_sply_devs;
 	int num_gpio_devs;
 	int gpio_base;
-	struct axp_funcdev_info  *regl_devs;
-	struct axp_funcdev_info  *sply_devs;
-	struct axp_funcdev_info  *gpio_devs;
+	struct axp_funcdev_info *regl_devs;
+	struct axp_funcdev_info *sply_devs;
+	struct axp_funcdev_info *gpio_devs;
+	struct axp_cfg_info *axp_cfg; 
 };
 
 struct axp_mfd_chip {
-	struct i2c_client	    *client;
-	struct device		    *dev;
+	struct i2c_client	*client;
+	struct device		*dev;
 	struct axp_mfd_chip_ops	*ops;
 
-	int			            type;
-	uint64_t		        irqs_enabled;
+	int			type;
+	uint64_t		irqs_enabled;
 
-	struct mutex		    lock;
-	struct work_struct	    irq_work;
+	struct mutex		lock;
+	struct work_struct	irq_work;
 
 	struct blocking_notifier_head notifier_list;
 };
@@ -263,18 +323,18 @@ struct axp_mfd_chip_ops {
 #define POWER20_MODE_CHGSTATUS      (0x01)
 #define POWER20_OTG_STATUS          (0x02)
 #define POWER20_IC_TYPE             (0x03)
-#define POWER20_DATA_BUFFER0        (0x04)
-#define POWER20_DATA_BUFFER1        (0x05)
-#define POWER20_DATA_BUFFER2        (0x06)
-#define POWER20_DATA_BUFFER3        (0x07)
-#define POWER20_DATA_BUFFER4        (0x08)
-#define POWER20_DATA_BUFFER5        (0x09)
-#define POWER20_DATA_BUFFER6        (0x0A)
-#define POWER20_DATA_BUFFER7        (0x0B)
-#define POWER20_DATA_BUFFER8        (0x0C)
-#define POWER20_DATA_BUFFER9        (0x0D)
-#define POWER20_DATA_BUFFERA        (0x0E)
-#define POWER20_DATA_BUFFERB        (0x0F)
+#define POWER20_DATA_BUFFER1        (0x04)
+#define POWER20_DATA_BUFFER2        (0x05)
+#define POWER20_DATA_BUFFER3        (0x06)
+#define POWER20_DATA_BUFFER4        (0x07)
+#define POWER20_DATA_BUFFER5        (0x08)
+#define POWER20_DATA_BUFFER6        (0x09)
+#define POWER20_DATA_BUFFER7        (0x0A)
+#define POWER20_DATA_BUFFER8        (0x0B)
+#define POWER20_DATA_BUFFER9        (0x0C)
+#define POWER20_DATA_BUFFERA        (0x0D)
+#define POWER20_DATA_BUFFERB        (0x0E)
+#define POWER20_DATA_BUFFERC        (0x0F)
 #define POWER20_LDO234_DC23_CTL     (0x12)
 #define POWER20_DC2OUT_VOL          (0x23)
 #define POWER20_LDO3_DC2_DVM        (0x25)
@@ -501,7 +561,7 @@ struct axp_mfd_chip_ops {
 #define AXP20_STATUS_INCHAR    ( 1 << 14)
 #define AXP20_STATUS_ICTEMOV   ( 1 << 15)
 
-extern struct battery_parameter *axp_pmu_battery;
+extern struct axp_cfg_info *axp_cfg_board;
 
 extern struct device *axp_get_dev(void);
 extern int axp_register_notifier(struct device *dev,
@@ -520,7 +580,5 @@ extern int axp_reads(struct device *dev, int reg, int len, uint8_t *val);
 extern int axp_update(struct device *dev, int reg, uint8_t val, uint8_t mask);
 extern int axp_set_bits(struct device *dev, int reg, uint8_t bit_mask);
 extern int axp_clr_bits(struct device *dev, int reg, uint8_t bit_mask);
-extern int axp_charger_set_usbcur_limit_extern(int usbcur_limit);
-extern void axp_power_off(void);
 extern struct i2c_client *axp;
 #endif /* __LINUX_PMIC_AXP_H */

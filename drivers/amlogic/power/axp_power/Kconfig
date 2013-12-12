@@ -36,4 +36,5 @@ config AXP_CHARGEINIT
 config AXP_CHGCHANGE
 	bool "AXP charging current set when suspend\resume\shutdown"
 	default y
+
 endif # !AW_AXP
